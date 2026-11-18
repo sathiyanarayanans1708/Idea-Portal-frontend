@@ -328,7 +328,6 @@
     .teacher-project-info { flex: 1; min-width: 0; }
     .teacher-project .button-secondary { margin-left: 0; min-height: 33px; font-size: 10px; }
     .team-card { margin-bottom: 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); box-shadow: 0 4px 14px rgba(37,45,80,.035); overflow: hidden; }
-    .team-card[data-team-description-toggle] { cursor: pointer; }
     .team-upload-picker, .upload-type-picker { display: grid; gap: 12px; }
     .team-upload-option-list { display: grid; gap: 10px; }
     .team-upload-option, .upload-type-option { width: 100%; display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
@@ -345,9 +344,12 @@
     .team-profile-badge img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .team-profile-badge .team-profile-initials { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #fff; }
     .team-card-heading { min-width: 0; flex: 1; }
-    .team-card-heading .panel-title { display: table; max-width: 100%; margin-bottom: 4px; padding: 5px 8px; border-radius: 7px; background: var(--purple-soft); color: var(--purple-dark); font-weight: 800; overflow-wrap: anywhere; }
+    .team-name-toggle { display: table; max-width: 100%; margin: 0 0 4px; padding: 5px 8px; border: 0; border-radius: 7px; background: var(--purple-soft); color: var(--purple-dark); font-size: 13px; font-weight: 800; letter-spacing: -.1px; text-align: left; overflow-wrap: anywhere; transition: color .15s ease, background .15s ease; }
+    .team-name-toggle:hover { background: #006b7a; color: #fff; }
+    .team-name-toggle:focus-visible, .team-member-name:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
     .team-card-heading .panel-description { margin-top: 0; }
     .team-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+    .team-details-box { border-top: 1px solid var(--line); }
     .team-section { padding: 14px 18px; border-top: 1px solid var(--line); }
     .team-photo-preview { margin-top: 12px; width: min(180px, 100%); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 12px; background: var(--canvas); overflow: hidden; }
     .team-photo-preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -358,7 +360,13 @@
     .team-member-avatar { width: 31px; height: 31px; flex: 0 0 auto; font-size: 9px; }
     .team-member-copy { display: grid; gap: 3px; flex: 1; min-width: 0; }
     .team-member-copy strong { font-size: 11px; overflow-wrap: anywhere; }
+    .team-member-name { padding: 0; border: 0; background: transparent; color: var(--ink); font-size: inherit; font-weight: inherit; text-align: left; overflow-wrap: anywhere; }
+    .team-member-name:hover { color: var(--purple-dark); text-decoration: underline; }
     .team-member-copy span, .team-member-status { color: var(--muted); font-size: 9px; overflow-wrap: anywhere; }
+    .team-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .team-info-item { display: grid; gap: 4px; min-width: 0; }
+    .team-info-item span { color: var(--muted); font-size: 9px; }
+    .team-info-item strong { font-size: 11px; overflow-wrap: anywhere; }
     .team-project-list { padding: 0 18px 8px; }
     .team-shared-projects { display: grid; gap: 8px; }
     .team-shared-project { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); }
@@ -385,11 +393,11 @@
     .chat-message { max-width: min(82%, 500px); align-self: flex-start; }
     .chat-message.mine { align-self: flex-end; }
     .chat-message-meta { margin: 0 4px 4px; color: var(--muted); font-size: 9px; }
-    .chat-bubble { padding: 9px 11px; border-radius: 11px 11px 11px 3px; background: var(--canvas); color: var(--ink); font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; white-space: pre-wrap; }
-    .chat-message.mine .chat-bubble { border-radius: 11px 11px 3px 11px; background: var(--purple); color: #fff; }
+    .chat-bubble { padding: 9px 11px; border-radius: 11px 11px 11px 3px; background: var(--canvas); color: var(--ink); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .chat-message.mine .chat-bubble { border-radius: 11px 11px 3px 11px; background: var(--purple-dark); color: #fff; }
     .chat-empty { margin: auto; padding: 20px; color: var(--muted); text-align: center; font-size: 11px; }
     .chat-composer { display: flex; align-items: flex-end; gap: 9px; padding: 12px; border-top: 1px solid var(--line); }
-    .chat-composer .textarea { flex: 1; min-width: 0; width: auto; min-height: 42px; max-height: 110px; resize: vertical; }
+    .chat-composer .textarea { flex: 1; min-width: 0; width: auto; min-height: 42px; max-height: 110px; resize: vertical; font-size: 13px; }
     .chat-composer .button-primary { min-height: 40px; }
     .chat-attachment-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .chat-upload-button { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); color: var(--ink); font-size: 10px; font-weight: 700; cursor: pointer; }
@@ -400,8 +408,9 @@
     .chat-attachment { display: grid; gap: 8px; }
     .chat-attachment img { display: block; max-width: min(240px, 100%); border-radius: 8px; border: 1px solid rgba(126,117,255,.28); }
     .chat-attachment-file { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; background: rgba(122,106,248,.08); color: var(--ink); text-decoration: none; font-size: 10px; font-weight: 700; }
-    .chat-bubble { padding: 9px 11px; border-radius: 11px 11px 11px 3px; background: var(--canvas); color: var(--ink); font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; white-space: pre-wrap; }
-    .chat-message.mine .chat-bubble { border-radius: 11px 11px 3px 11px; background: var(--purple); color: #fff; }
+    .chat-bubble { padding: 9px 11px; border-radius: 11px 11px 11px 3px; background: var(--canvas); color: var(--ink); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .chat-message.mine .chat-bubble { border-radius: 11px 11px 3px 11px; background: var(--purple-dark); color: #fff; }
+    html[data-theme="night"] .chat-message.mine .chat-bubble { background: var(--purple); color: var(--canvas); }
     @media (max-width: 720px) { .chat-workspace { grid-template-columns: minmax(0, 1fr); } .chat-contact-list { display: flex; overflow-x: auto; } .chat-contact { min-width: 165px; } .chat-panel { min-height: 370px; } .chat-message-list { min-height: 240px; max-height: 50vh; } }
     .project-detail-actions .status { margin-right: auto; }
     .project-title-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 0; background: transparent; padding: 0; color: var(--ink); font-size: 14px; font-weight: 750; text-align: left; cursor: pointer; }
@@ -440,6 +449,8 @@
     .query-detail-content { display: grid; gap: 8px; }
     .query-detail-label { margin: 8px 0 0; color: var(--muted); font-size: 11px; font-weight: 750; }
     .query-detail-text { padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: var(--canvas); color: var(--ink); font-size: 14px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .field[readonly], .field[aria-labelledby="profileAccountTypeLabel"], .query-detail-text { cursor: default; }
+    .field[readonly] { caret-color: transparent; }
     .query-detail-text.answer { border-left: 4px solid var(--green); }
     .drop-zone { display: block; min-width: 0; border: 1px dashed #a9e3ea; background: #f2fcfd; border-radius: 10px; text-align: center; padding: 18px 12px; margin-top: 13px; color: #777e96; font-size: 10px; line-height: 1.5; cursor: pointer; }
     .drop-zone svg { width: 21px; height: 21px; color: var(--purple); display: block; margin: 0 auto 7px; }
@@ -906,7 +917,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
       const positionField = state.role === "teacher"
         ? `<label class="field-label" for="profilePost">Position</label><select class="field" id="profilePost" name="post">${positions.map(position => `<option ${position === selectedPost ? "selected" : ""}>${escapeHtml(position)}</option>`).join("")}</select>`
         : "";
-      showModal("Profile details", "View and update your profile. Your email address cannot be changed.", `<img class="profile-avatar-preview" id="profileAvatarPreview" src="${escapeHtml(avatarImage)}" alt="Profile picture preview" ${avatarImage ? "" : "hidden"}><label class="field-label" for="profileAvatarInput">Profile picture</label><input class="field" id="profileAvatarInput" name="avatar" type="file" accept="image/jpeg,image/png,image/webp,image/gif"><p class="project-meta">JPEG, PNG, WebP or GIF · Max 1 MB</p><label class="field-label" for="profileAccountType">Account type</label><input class="field" id="profileAccountType" value="${state.role === "teacher" ? "Teacher" : "Student"}" readonly><label class="field-label" for="profileEmail">Email</label><input class="field" id="profileEmail" type="email" value="${escapeHtml(state.account.email)}" readonly><label class="field-label" for="profileNameInput">Name</label><input class="field" id="profileNameInput" name="name" value="${escapeHtml(state.account.name)}" required>${positionField}${departmentField}<div class="profile-stats-summary">${completedProjects} completed · ${pendingProjects} pending</div><div style="margin-top:16px"><button class="button-danger" id="deleteProfileButton" type="button">Delete profile</button></div>`, "Save changes", async formData => {
+      showModal("Profile details", "View and update your profile. Your email address cannot be changed.", `<img class="profile-avatar-preview" id="profileAvatarPreview" src="${escapeHtml(avatarImage)}" alt="Profile picture preview" ${avatarImage ? "" : "hidden"}><label class="field-label" for="profileAvatarInput">Profile picture</label><input class="field" id="profileAvatarInput" name="avatar" type="file" accept="image/jpeg,image/png,image/webp,image/gif"><p class="project-meta">JPEG, PNG, WebP or GIF · Max 1 MB</p><div class="field-label" id="profileAccountTypeLabel">Account type</div><div class="field" aria-labelledby="profileAccountTypeLabel">${state.role === "teacher" ? "Teacher" : "Student"}</div><label class="field-label" for="profileEmail">Email</label><input class="field" id="profileEmail" type="email" value="${escapeHtml(state.account.email)}" readonly><label class="field-label" for="profileNameInput">Name</label><input class="field" id="profileNameInput" name="name" value="${escapeHtml(state.account.name)}" required>${positionField}${departmentField}<div class="profile-stats-summary">${completedProjects} completed · ${pendingProjects} pending</div><div style="margin-top:16px"><button class="button-danger" id="deleteProfileButton" type="button">Delete profile</button></div>`, "Save changes", async formData => {
         const name = String(formData.get("name") || "").trim();
         const post = state.role === "teacher" ? String(formData.get("post") || "") : "";
         const department = state.role === "student" ? String(formData.get("profileDepartment") || "") : "";
@@ -958,7 +969,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
         closeModal();
         render();
         showToast("Profile updated.");
-      });
+      }, false);
       document.getElementById("profileAvatarInput").addEventListener("change", async event => {
         const file = event.target.files?.[0];
         if (!file) {
@@ -1052,7 +1063,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
     }
 
     function studentOverview() {
-      return `<div class="page-heading"><div><p class="eyebrow">STUDENT WORKSPACE</p><h1>Good morning, ${escapeHtml(state.account?.name || "") } <span aria-hidden="true">✦</span></h1><p class="page-subtitle">Your workspace is ready. Add your project details to get started.</p></div><button class="button-primary" data-action="upload">${icons.upload} Upload a project</button></div>
+      return `<div class="page-heading"><div><p class="eyebrow">STUDENT WORKSPACE</p><h1>Good morning, ${escapeHtml(state.account?.name || "") } <span aria-hidden="true">✦</span></h1><p class="page-subtitle">Your workspace is ready. Add your project details to get started.</p></div></div>
         <section class="welcome-banner"><div class="welcome-copy"><div class="welcome-kicker">Your project workspace</div><div class="welcome-tag">Build mode</div><h2 class="welcome-title">Make your next idea happen.</h2><p class="welcome-subtitle">Upload your work, track progress, and keep your creative process moving.</p></div><div class="banner-art" aria-hidden="true"><div class="tech-window"><div class="code-lines"><span class="code-line"></span><span class="code-line"></span><span class="code-line"></span></div></div><div class="banner-orbit"></div><span class="banner-spark">✦</span></div></section>
         <section class="stats-grid student-stats-grid" aria-label="Project summary">
           <article class="stat-card"><div class="stat-top"><span>Active projects</span><span class="stat-icon">${icons.folder}</span></div><div class="stat-value" id="projectStat">${state.projects.length.toString().padStart(2, "0")}</div><div class="stat-note">Across this semester</div></article>
@@ -1092,8 +1103,39 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
         const account = accounts[member.email];
         const name = account?.name || "Account unavailable";
         const label = status === "pending" ? "Invitation pending" : member.email === team.ownerEmail ? "Team creator" : "Team member";
-        return `<div class="team-member"><div class="avatar team-member-avatar">${escapeHtml(getInitials(name))}</div><div class="team-member-copy"><strong>${escapeHtml(name)}</strong><span>${escapeHtml(member.email)}</span></div><span class="team-member-status">${label}</span></div>`;
+        const nameMarkup = status === "pending" ? escapeHtml(name) : `<button class="team-member-name" type="button" data-team-member="${escapeHtml(member.email)}">${escapeHtml(name)}</button>`;
+        return `<div class="team-member"><div class="avatar team-member-avatar">${escapeHtml(getInitials(name))}</div><div class="team-member-copy"><strong>${nameMarkup}</strong><span>${escapeHtml(member.email)}</span></div><span class="team-member-status">${label}</span></div>`;
       }).join("")}</div>`;
+    }
+
+    function teamMemberProfileModal(email) {
+      const account = getAccountRecords()[email];
+      if (!account) {
+        showToast("This team member’s profile is no longer available.");
+        return;
+      }
+      const name = account.name || "Team member";
+      const accountType = account.role === "teacher" ? "Teacher" : "Student";
+      const extraDetails = account.role === "teacher"
+        ? (account.post ? `<div class="team-info-item"><span>Position</span><strong>${escapeHtml(account.post)}</strong></div>` : "")
+        : [account.department, account.section].filter(Boolean).map((value, index) => `<div class="team-info-item"><span>${index === 0 ? "Department" : "Section"}</span><strong>${escapeHtml(value)}</strong></div>`).join("");
+      const canChat = state.role === "student" && email !== state.account.email;
+      const chatOption = canChat
+        ? `<button class="button-primary" type="button" data-chat-member="${escapeHtml(email)}">Chat</button>`
+        : "";
+      showModal(`${escapeHtml(name)}’s profile`, "Team member profile details.", `<div class="team-info-grid"><div class="team-info-item"><span>Name</span><strong>${escapeHtml(name)}</strong></div><div class="team-info-item"><span>Email</span><strong>${escapeHtml(email)}</strong></div><div class="team-info-item"><span>Account type</span><strong>${accountType}</strong></div>${extraDetails}</div>`, "", () => {}, false, chatOption);
+      document.querySelector("#modalHost [data-chat-member]")?.addEventListener("click", () => startDirectChat(email));
+    }
+
+    function startDirectChat(peerEmail) {
+      if (state.role !== "student" || !getStudentContacts().some(account => account.email === peerEmail)) {
+        showToast("This team member is not available for chat.");
+        return;
+      }
+      closeModal();
+      state.activeChatPeerEmail = peerEmail;
+      state.page = "chat";
+      render();
     }
 
     function teamProfileBadge(team) {
@@ -1120,7 +1162,9 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
           const actions = project.id && project.fileName ? `<div class="team-shared-project-actions"><button class="button-secondary" type="button" data-open-team-file="${escapeHtml(team.id)}" data-project-id="${escapeHtml(project.id)}">Open file</button><button class="button-secondary" type="button" data-download-team-file="${escapeHtml(team.id)}" data-project-id="${escapeHtml(project.id)}">Download</button></div>` : "";
           return `<div class="team-shared-project"><div class="team-shared-project-copy"><strong>${escapeHtml(project.name || "Untitled project")}</strong><span>Shared by ${escapeHtml(submitter)} · ${escapeHtml(formatSubmissionDate(project))}${project.fileName ? ` · ${escapeHtml(project.fileName)}` : ""}</span></div>${actions}</div>`;
         }).join("")}</div></section>` : "";
-        return `<article class="team-card" data-team-description-toggle aria-expanded="false" aria-label="Toggle ${escapeHtml(team.name)} team description"><div class="team-card-header"><div class="team-card-summary">${teamProfileBadge(team)}<div class="team-card-heading"><h2 class="panel-title">${escapeHtml(team.name)}</h2><p class="panel-description">${teamMembers(team).length} members</p></div></div><div class="team-actions">${team.ownerEmail === currentEmail ? `<button class="button-secondary" data-edit-team="${escapeHtml(team.id)}">Edit details</button><button class="button-secondary" data-invite-team="${escapeHtml(team.id)}">Invite member</button><button class="button-danger" type="button" data-delete-team="${escapeHtml(team.id)}">Delete team</button>` : ""}<button class="button-primary" data-upload-team-project="${escapeHtml(team.id)}">${icons.upload} Upload project</button></div></div><div class="team-description-box hidden">${escapeHtml(team.description || "No description provided.")}</div><section class="team-section"><h3 class="team-section-title">Members</h3>${teamMemberMarkup(team)}${team.ownerEmail === currentEmail && teamMembers(team, "pending").length ? `<h3 class="team-section-title team-pending-title">Pending invitations</h3>${teamMemberMarkup(team, "pending")}` : ""}</section>${sharedProjects}</article>`;
+        const ownerName = accounts[team.ownerEmail]?.name || team.ownerEmail;
+        const teamDetailsId = `team-details-${escapeHtml(team.id)}`;
+        return `<article class="team-card"><div class="team-card-header"><div class="team-card-summary">${teamProfileBadge(team)}<div class="team-card-heading"><h2 class="panel-title"><button class="team-name-toggle" type="button" data-toggle-team-details aria-expanded="false" aria-controls="${teamDetailsId}">${escapeHtml(team.name)}</button></h2><p class="panel-description">${teamMembers(team).length} members</p></div></div><div class="team-actions">${team.ownerEmail === currentEmail ? `<button class="button-secondary" data-edit-team="${escapeHtml(team.id)}">Edit details</button><button class="button-secondary" data-invite-team="${escapeHtml(team.id)}">Invite member</button><button class="button-danger" type="button" data-delete-team="${escapeHtml(team.id)}">Delete team</button>` : ""}<button class="button-primary" data-upload-team-project="${escapeHtml(team.id)}">${icons.upload} Upload project</button></div></div><div class="team-details-box hidden" id="${teamDetailsId}"><div class="team-description-box">${escapeHtml(team.description || "No description provided.")}</div><section class="team-section"><h3 class="team-section-title">Team details</h3><div class="team-info-grid"><div class="team-info-item"><span>Created by</span><strong>${escapeHtml(ownerName)}</strong></div><div class="team-info-item"><span>Created</span><strong>${escapeHtml(formatSubmissionDateTime(team.createdAt))}</strong></div><div class="team-info-item"><span>Members</span><strong>${teamMembers(team).length}</strong></div><div class="team-info-item"><span>Shared projects</span><strong>${projects.length}</strong></div></div></section><section class="team-section"><h3 class="team-section-title">Members</h3>${teamMemberMarkup(team)}${team.ownerEmail === currentEmail && teamMembers(team, "pending").length ? `<h3 class="team-section-title team-pending-title">Pending invitations</h3>${teamMemberMarkup(team, "pending")}` : ""}</section>${sharedProjects}</div></article>`;
       }).join("");
       return `<div class="page-heading"><div><p class="eyebrow">STUDENT WORKSPACE</p><h1>My team</h1><p class="page-subtitle">Create a team, invite student accounts, and submit shared projects.</p></div><button class="button-primary" data-action="create-team">＋ Create a team</button></div>${invitationCards}${teamCards || '<section class="panel"><div class="empty-state">You haven’t joined a team yet. Create one or accept an invitation.</div></section>'}`;
     }
@@ -1786,6 +1830,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
         render();
         showToast("Project created in My projects.");
       });
+      document.getElementById("projectTopicSelect").selectedIndex = -1;
     }
 
     async function hydrateProjectDataTables() {
@@ -1923,17 +1968,19 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
       document.getElementById("modalHost").innerHTML = "";
     }
 
-    function showModal(title, subtitle, body, submitLabel, onSubmit) {
+    function showModal(title, subtitle, body, submitLabel, onSubmit, focusFirstField = true, extraActions = "") {
       const host = document.getElementById("modalHost");
-      host.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><h2 class="modal-title" id="modalTitle">${title}</h2><p class="modal-subtitle">${subtitle}</p></div><button class="modal-close" type="button" aria-label="Close dialog" data-close-modal>×</button></div><form id="modalForm">${body}<div class="modal-actions"><button type="button" class="button-secondary" data-close-modal>Cancel</button>${submitLabel ? `<button type="submit" class="button-primary">${submitLabel}</button>` : ""}</div></form></section></div>`;
+      host.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><h2 class="modal-title" id="modalTitle">${title}</h2><p class="modal-subtitle">${subtitle}</p></div><button class="modal-close" type="button" aria-label="Close dialog" data-close-modal>×</button></div><form id="modalForm">${body}<div class="modal-actions">${extraActions}<button type="button" class="button-secondary" data-close-modal>Cancel</button>${submitLabel ? `<button type="submit" class="button-primary">${submitLabel}</button>` : ""}</div></form></section></div>`;
       host.querySelector(".modal").addEventListener("click", event => event.stopPropagation());
       host.querySelectorAll("[data-close-modal]").forEach(button => button.addEventListener("click", closeModal));
       host.querySelector("#modalForm").addEventListener("submit", event => {
         event.preventDefault();
         onSubmit(new FormData(event.currentTarget));
       });
-      const firstField = host.querySelector("input:not([type=file]), textarea, select");
-      if (firstField) firstField.focus();
+      if (focusFirstField) {
+        const firstField = host.querySelector("input:not([type=file]), textarea, select");
+        if (firstField) firstField.focus();
+      }
     }
 
     function getStudentTeamsForUpload() {
@@ -2282,7 +2329,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
         closeModal();
         render();
         showToast("Your response was sent to the student.");
-      });
+      }, false);
     }
 
     function editStudentQuery(index) {
@@ -2455,6 +2502,11 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
         render();
         return;
       }
+      const teamMemberButton = event.target.closest("[data-team-member]");
+      if (teamMemberButton) {
+        teamMemberProfileModal(teamMemberButton.dataset.teamMember);
+        return;
+      }
       const attachFileButton = event.target.closest("[data-attach-file]");
       if (attachFileButton) { attachProjectFileModal(Number(attachFileButton.dataset.attachFile)); return; }
       const editPersonalProjectButton = event.target.closest("[data-edit-personal-project]");
@@ -2482,11 +2534,11 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
       }
       const projectCard = event.target.closest("[data-project-card]");
       if (projectCard && !event.target.closest("button")) toggleProjectDetails(projectCard.querySelector("[data-expand-project]"));
-      const teamCard = event.target.closest("[data-team-description-toggle]");
-      if (teamCard && !event.target.closest("button, input, select, textarea, a")) {
-        const expanded = teamCard.getAttribute("aria-expanded") === "true";
-        teamCard.setAttribute("aria-expanded", String(!expanded));
-        teamCard.querySelector(".team-description-box")?.classList.toggle("hidden", expanded);
+      const teamDetailsButton = event.target.closest("[data-toggle-team-details]");
+      if (teamDetailsButton) {
+        const expanded = teamDetailsButton.getAttribute("aria-expanded") === "true";
+        teamDetailsButton.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(teamDetailsButton.getAttribute("aria-controls"))?.classList.toggle("hidden", expanded);
       }
       const studentQuery = event.target.closest("[data-open-student-query]");
       if (studentQuery) {
@@ -2509,6 +2561,11 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,`;
       }
     });
     document.addEventListener("keydown", event => {
+      if (event.key === "Enter" && event.target.matches("textarea[name='message']") && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        event.target.closest("[data-chat-form]")?.requestSubmit();
+        return;
+      }
       if (event.key !== "Enter" && event.key !== " ") return;
       if (event.target.closest("button")) return;
       const topicRow = event.target.closest("[data-topic-select]");
