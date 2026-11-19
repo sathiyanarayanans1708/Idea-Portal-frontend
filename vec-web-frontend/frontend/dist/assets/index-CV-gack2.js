@@ -12,28 +12,28 @@ Error generating stack: `+e.message+`
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f6f7fb">
-  <title>Node Theory — Student Project Portal</title>
+  <title>Node Theory</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap');
 
     :root {
-      --ink: #1d2340;
-      --muted: #626a80;
-      --line: #eceef4;
+      --ink: #173044;
+      --muted: #5f7382;
+      --line: #dfe8ec;
       --paper: #fff;
-      --canvas: #f7f8fc;
+      --canvas: #f5f8fa;
       --table-bg: #fff;
-      --table-header-bg: #f5f9ff;
-      --table-row-hover: #effbfc;
-      --purple: #007f91;
-      --purple-dark: #006b7a;
-      --purple-soft: #e2f9fc;
+      --table-header-bg: #f1f7f8;
+      --table-row-hover: #eaf6f6;
+      --purple: #087f8c;
+      --purple-dark: #086977;
+      --purple-soft: #e4f3f4;
       --green: #28a879;
       --green-soft: #e8f7f1;
       --orange: #e59b42;
       --orange-soft: #fff4e5;
       --red: #df696c;
-      --shadow: 0 12px 35px rgba(37, 45, 80, .055);
+      --shadow: 0 12px 35px rgba(23, 48, 68, .07);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background: var(--canvas);
@@ -454,6 +454,13 @@ Error generating stack: `+e.message+`
     .modal-close { border: 0; background: transparent; color: #9298a9; font-size: 20px; padding: 0 3px; line-height: 1; }
     .field-label { display: block; color: #5f6680; font-size: 10px; font-weight: 700; margin: 12px 0 6px; }
     .field, .textarea { display: block; width: 100%; border: 1px solid #e8eaf1; border-radius: 8px; outline: 0; padding: 10px 11px; color: var(--ink); background: #fff; font-size: 11px; }
+    .department-picker summary { cursor: pointer; list-style: none; }
+    .department-picker summary::-webkit-details-marker { display: none; }
+    .department-picker summary::after { content: ""; float: right; width: 7px; height: 7px; margin: 2px 3px 0 0; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+    .department-picker[open] summary::after { transform: rotate(225deg); }
+    .department-options { display: grid; gap: 2px; max-height: 220px; overflow-y: auto; margin-top: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    .department-option { width: 100%; border: 0; border-radius: 6px; padding: 9px 10px; background: transparent; color: var(--ink); text-align: left; font-size: 11px; }
+    .department-option:hover, .department-option:focus-visible { background: var(--purple-soft); color: var(--purple-dark); }
     .textarea { resize: vertical; min-height: 89px; line-height: 1.5; }
     .query-detail-content { display: grid; gap: 8px; }
     .query-detail-label { margin: 8px 0 0; color: var(--muted); font-size: 11px; font-weight: 750; }
@@ -481,6 +488,101 @@ Error generating stack: `+e.message+`
     .auth-tabs button.active { background: white; color: var(--purple-dark); box-shadow: 0 2px 7px rgba(0,95,110,.1); }
     .auth-error { min-height: 16px; color: var(--red); font-size: 10px; margin-top: 8px; }
     .auth-card .button-primary { width: 100%; margin-top: 10px; }
+    .landing-page { min-height: 100vh; color: var(--ink); background: var(--canvas); }
+    .landing-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px max(28px, calc((100% - 1180px) / 2)); border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 4px 18px rgba(23,48,68,.035); }
+    .landing-brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+    .landing-brand-copy { min-width: 0; }
+    .landing-brand-mark { display: grid; width: 45px; height: 45px; place-items: center; border-radius: 14px; background: linear-gradient(135deg, #086977, #17a6ad); color: #fff; font-size: 11px; font-weight: 850; letter-spacing: .08em; }
+    .landing-brand-copy strong, .landing-brand-copy small { display: block; }
+    .landing-brand-copy strong { font-size: 16px; letter-spacing: -.02em; }
+    .landing-nav { display: flex; align-items: center; gap: 25px; }
+    .landing-nav a { color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 650; }
+    .landing-nav a:hover { color: var(--purple-dark); }
+    .landing-actions { display: flex; align-items: center; gap: 9px; }
+    .landing-theme-select { width: 56px; min-height: 40px; padding: 0 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--ink); font-size: 16px; }
+    .landing-login, .landing-button { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; padding: 0 16px; border: 1px solid var(--line); border-radius: 9px; font-size: 12px; font-weight: 750; text-decoration: none; cursor: pointer; }
+    .landing-login { background: var(--paper); color: var(--ink); white-space: nowrap; }
+    .landing-login:hover, .landing-button-secondary:hover { border-color: var(--purple); background: var(--purple-soft); color: var(--purple-dark); }
+    .landing-create-account { border-color: #086977; background: #086977; color: #fff; }
+    .landing-create-account:hover { border-color: #075662; background: #075662; color: #fff; }
+    .landing-hero { position: relative; overflow: hidden; background: radial-gradient(circle at 82% 46%, rgba(23,166,173,.16), transparent 30%), linear-gradient(135deg, #edf7f8 0%, var(--canvas) 66%); }
+    .landing-hero-inner { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); align-items: center; gap: 56px; width: min(1180px, 100%); min-height: 430px; margin: auto; padding: 70px 28px; }
+    .landing-eyebrow { margin: 0 0 16px; color: var(--purple-dark); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .landing-hero h1 { max-width: 680px; margin: 0; color: var(--ink); font-size: clamp(38px, 5vw, 64px); font-weight: 800; letter-spacing: -.045em; line-height: 1.05; }
+    .landing-hero-copy { max-width: 630px; margin: 20px 0 27px; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .landing-hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .landing-button-primary { border-color: #086977; background: #086977; color: #fff; }
+    .landing-button-primary:hover { background: #075662; }
+    .landing-button-secondary { background: var(--paper); color: var(--ink); }
+    .landing-visual { position: relative; display: grid; min-height: 260px; place-items: center; }
+    .landing-orbit { position: absolute; width: 246px; height: 246px; border: 1px solid rgba(8,127,140,.24); border-radius: 50%; }
+    .landing-orbit::before, .landing-orbit::after { position: absolute; inset: 20px; border: 1px dashed rgba(8,127,140,.28); border-radius: 50%; content: ""; }
+    .landing-orbit::after { inset: 48px; border-style: solid; }
+    .landing-idea-core { z-index: 1; display: grid; width: 118px; height: 118px; place-items: center; border: 8px solid rgba(255,255,255,.72); border-radius: 35px; background: linear-gradient(145deg, #086977, #20b4ba); box-shadow: 0 22px 48px rgba(8,105,119,.2); color: #fff; font-size: 20px; font-weight: 850; letter-spacing: .08em; transform: rotate(-7deg); }
+    .landing-orbit-label { position: absolute; z-index: 2; padding: 9px 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); box-shadow: var(--shadow); color: var(--ink); font-size: 10px; font-weight: 750; }
+    .landing-orbit-label.one { top: 21px; right: 12px; }
+    .landing-orbit-label.two { right: 2px; bottom: 37px; }
+    .landing-orbit-label.three { bottom: 20px; left: 3px; }
+    .landing-section { width: min(1100px, 100%); margin: auto; padding: 74px 28px; scroll-margin-top: 85px; }
+    .landing-section-heading { max-width: 700px; margin: 0 0 30px; }
+    .landing-section-heading .landing-eyebrow { margin-bottom: 9px; }
+    .landing-section-heading h2 { margin: 0; font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -.03em; line-height: 1.15; }
+    .landing-section-heading p, .landing-about-copy { color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .landing-about-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: stretch; gap: 22px; }
+    .landing-about-copy { margin: 0; padding: 27px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .landing-vision { padding: 27px; border-radius: 16px; background: #086977; color: #fff; }
+    .landing-vision h3 { margin: 0 0 12px; font-size: 16px; }
+    .landing-vision p { margin: 0; color: rgba(255,255,255,.86); font-size: 13px; line-height: 1.75; }
+    .landing-objectives { background: var(--paper); }
+    .landing-card-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+    .landing-card { min-height: 150px; padding: 21px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); }
+    .landing-card-number { display: grid; width: 30px; height: 30px; margin-bottom: 14px; place-items: center; border-radius: 9px; background: var(--purple-soft); color: var(--purple-dark); font-size: 11px; font-weight: 800; }
+    .landing-card p { margin: 0; color: var(--ink); font-size: 13px; font-weight: 650; line-height: 1.6; }
+    .landing-program-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .landing-list-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 650; line-height: 1.55; }
+    .landing-list-item::before { width: 8px; height: 8px; flex: 0 0 8px; margin-top: 5px; border-radius: 50%; background: var(--purple); content: ""; }
+    .landing-facilities { background: #edf7f8; }
+    .landing-facility-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .landing-facility { display: flex; min-height: 94px; align-items: center; gap: 15px; padding: 18px; border: 1px solid rgba(8,127,140,.14); border-radius: 13px; background: rgba(255,255,255,.82); color: var(--ink); font-size: 13px; font-weight: 700; }
+    .landing-facility-mark { display: grid; width: 38px; height: 38px; flex: 0 0 38px; place-items: center; border-radius: 11px; background: var(--purple-soft); color: var(--purple-dark); font-size: 11px; font-weight: 850; }
+    .landing-footer { padding: 24px 28px; border-top: 1px solid var(--line); background: var(--paper); color: var(--muted); text-align: center; font-size: 11px; }
+    html[data-theme="night"] .landing-hero { background: radial-gradient(circle at 82% 46%, rgba(37,199,217,.14), transparent 30%), linear-gradient(135deg, #182a32 0%, var(--canvas) 66%); }
+    html[data-theme="night"] .landing-facilities { background: #182a32; }
+    html[data-theme="night"] .landing-facility { background: var(--paper); border-color: var(--line); }
+    html[data-theme="ambient"] .landing-hero { background: radial-gradient(circle at 82% 46%, rgba(37,199,217,.15), transparent 30%), linear-gradient(135deg, #e1f3ed 0%, var(--canvas) 66%); }
+    html[data-theme="ambient"] .landing-facilities { background: #e7f2eb; }
+    @media (max-width: 820px) {
+      .landing-header { gap: 14px; padding: 12px 20px; }
+      .landing-nav { gap: 12px; }
+      .landing-actions { gap: 6px; }
+      .landing-theme-select { width: 56px; }
+      .landing-login { padding: 0 12px; font-size: 11px; }
+      .landing-hero-inner { grid-template-columns: 1fr minmax(220px, .65fr); gap: 22px; padding: 58px 24px; }
+      .landing-card-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .landing-facility-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .landing-header { gap: 8px; padding: 11px 12px; }
+      .landing-brand { gap: 8px; }
+      .landing-brand-mark { width: 36px; height: 36px; border-radius: 11px; font-size: 10px; }
+      .landing-brand-copy strong { font-size: 12px; white-space: nowrap; }
+      .landing-nav { display: none; }
+      .landing-actions { gap: 5px; }
+      .landing-theme-select { width: 44px; min-height: 36px; padding: 0 3px; font-size: 11px; }
+      .landing-login { min-height: 36px; padding: 0 8px; font-size: 9px; }
+      .landing-create-account { padding: 0 8px; }
+      .landing-hero-inner { grid-template-columns: 1fr; gap: 10px; padding: 54px 20px 38px; }
+      .landing-hero h1 { max-width: 500px; font-size: clamp(38px, 12vw, 54px); }
+      .landing-hero-copy { font-size: 13px; }
+      .landing-visual { min-height: 230px; }
+      .landing-section { padding: 55px 20px; }
+      .landing-about-grid, .landing-program-grid { grid-template-columns: 1fr; }
+      .landing-card-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .landing-card { min-height: 140px; padding: 15px; }
+      .landing-facility-grid { grid-template-columns: 1fr; gap: 9px; }
+      .landing-facility { min-height: 75px; }
+    }
+    .auth-back-button { margin: 0 0 12px; padding: 0; border: 0; background: transparent; color: var(--purple-dark); font-size: 11px; font-weight: 700; cursor: pointer; }
     html[data-theme="ambient"] { color-scheme: light; --ink:#453f36; --muted:#6f6559; --line:#e3d8c9; --paper:#fffaf2; --canvas:#f4ecdf; --table-bg:#fffaf2; --table-header-bg:#ece3d5; --table-row-hover:#e6f4f2; --purple:#007f91; --purple-dark:#006b7a; --purple-soft:#e1f7f8; --green:#356c55; --green-soft:#e4f0e6; --orange:#8a591e; --orange-soft:#f8ead8; }
     html[data-theme="night"] { color-scheme: dark; --ink:#e8eaf0; --muted:#a2a9b7; --line:#343c49; --paper:#1d2430; --canvas:#141a23; --table-bg:#1d2430; --table-header-bg:#283341; --table-row-hover:#253540; --purple:#55d9e8; --purple-dark:#a2f1f8; --purple-soft:#173b43; --green:#6fc5a0; --green-soft:#20392f; --orange:#e0aa62; --orange-soft:#3a3022; --red:#e88989; }
     html[data-theme="night"] body, html[data-theme="ambient"] body { background: var(--canvas); color: var(--ink); }
@@ -578,8 +680,88 @@ Error generating stack: `+e.message+`
   </style>
 </head>
 <body>
-  <section class="auth-screen" id="authScreen" aria-label="Account access">
+  <div class="landing-page" id="landingPage">
+    <header class="landing-header">
+      <a class="landing-brand" href="#home" aria-label="Node Theory home">
+        <span class="landing-brand-mark" aria-hidden="true">NT</span>
+        <span class="landing-brand-copy"><strong>Node Theory</strong></span>
+      </a>
+      <nav class="landing-nav" aria-label="Landing page sections">
+        <a href="#about">About</a><a href="#objectives">Objectives</a><a href="#programs">Programs</a><a href="#facilities">Facilities</a>
+      </nav>
+      <div class="landing-actions">
+        <select class="landing-theme-select" id="landingThemeSelect" aria-label="Choose color theme" title="Choose color theme">
+          <option value="light" aria-label="Light theme">☼</option><option value="night" aria-label="Dark theme">☾</option><option value="ambient" aria-label="Ambient theme">◐</option>
+        </select>
+        <button class="landing-login" id="landingLoginButton" type="button">Log in</button>
+        <button class="landing-login landing-create-account" id="landingHeaderSignupButton" type="button">Create account</button>
+      </div>
+    </header>
+    <main>
+      <section class="landing-hero" id="home">
+        <div class="landing-hero-inner">
+          <div>
+            <p class="landing-eyebrow">AICTE IDEA Lab · SRM Valliammai Engineering College</p>
+            <h1>Turn bold ideas into working prototypes.</h1>
+            <p class="landing-hero-copy">A shared space for students, faculty, and industry to explore, build, and bring ideas to life.</p>
+            <div class="landing-hero-actions">
+              <button class="landing-button landing-button-primary" id="landingSignupButton" type="button">Create your account</button>
+              <a class="landing-button landing-button-secondary" href="#about">Discover the lab</a>
+            </div>
+          </div>
+          <div class="landing-visual" aria-hidden="true">
+            <div class="landing-orbit"></div><div class="landing-idea-core">IDEA</div>
+            <span class="landing-orbit-label one">IMAGINE</span><span class="landing-orbit-label two">PROTOTYPE</span><span class="landing-orbit-label three">INNOVATE</span>
+          </div>
+        </div>
+      </section>
+      <section class="landing-section" id="about">
+        <div class="landing-section-heading"><p class="landing-eyebrow">A place to make ideas real</p><h2>About the IDEA Lab</h2></div>
+        <div class="landing-about-grid">
+          <p class="landing-about-copy">The AICTE IDEA Lab at SRM Valliammai Engineering College is a shared space for students, faculty, and industry to turn ideas into working prototypes. It supports innovation, interdisciplinary learning, and research, and it encourages entrepreneurship among students.</p>
+          <aside class="landing-vision"><h3>Our Vision</h3><p>To transform innovative ideas into real products that meet socio-economic needs, and to connect concept, development, and commercialization.</p></aside>
+        </div>
+      </section>
+      <section class="landing-objectives" id="objectives">
+        <div class="landing-section">
+          <div class="landing-section-heading"><p class="landing-eyebrow">Learn by creating</p><h2>Objectives</h2></div>
+          <div class="landing-card-grid">
+            <article class="landing-card"><span class="landing-card-number">01</span><p>Convert ideas into functional prototypes under one roof</p></article>
+            <article class="landing-card"><span class="landing-card-number">02</span><p>Build creativity, critical thinking, and problem-solving skills</p></article>
+            <article class="landing-card"><span class="landing-card-number">03</span><p>Encourage multidisciplinary learning and teamwork</p></article>
+            <article class="landing-card"><span class="landing-card-number">04</span><p>Make teaching and learning more engaging for engineering students</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="landing-section" id="programs">
+        <div class="landing-section-heading"><p class="landing-eyebrow">Opportunities to build skills</p><h2>Training and Programs</h2></div>
+        <div class="landing-program-grid">
+          <div class="landing-list-item">Faculty development programs (FDPs)</div>
+          <div class="landing-list-item">Student skilling programs, ideation workshops, and internships</div>
+          <div class="landing-list-item">Industry workshops and professional skilling programs</div>
+          <div class="landing-list-item">Awareness programs for school and ITI students</div>
+          <div class="landing-list-item">Project support for students</div>
+        </div>
+      </section>
+      <section class="landing-facilities" id="facilities">
+        <div class="landing-section">
+          <div class="landing-section-heading"><p class="landing-eyebrow">Tools and spaces for exploration</p><h2>Integrated Facilities</h2></div>
+          <div class="landing-facility-grid">
+            <div class="landing-facility"><span class="landing-facility-mark">HF</span>High Frequency System Lab</div>
+            <div class="landing-facility"><span class="landing-facility-mark">VLSI</span>VLSI Lab</div>
+            <div class="landing-facility"><span class="landing-facility-mark">RB</span>Robotics Lab</div>
+            <div class="landing-facility"><span class="landing-facility-mark">COM</span>Communication Lab</div>
+            <div class="landing-facility"><span class="landing-facility-mark">AI</span>AI &amp; DS Lab</div>
+            <div class="landing-facility"><span class="landing-facility-mark">IoT</span>Centre of Excellence in Computing (IoT, Cyber Security)</div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="landing-footer">AICTE IDEA Lab · SRM Valliammai Engineering College</footer>
+  </div>
+  <section class="auth-screen hidden" id="authScreen" aria-label="Account access">
     <form class="auth-card" id="authForm">
+      <button class="auth-back-button" id="authBackButton" type="button">← Back to home</button>
       <div class="auth-theme-row"><select class="theme-select auth-theme-select" id="authThemeSelect" aria-label="Choose color theme" title="Choose color theme"><option value="light" aria-label="Light theme">☼</option><option value="night" aria-label="Dark theme">☾</option><option value="ambient" aria-label="Ambient theme">◐</option></select></div>
       <div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 14.8 8l5.7 2.8-5.7 2.8L12 19.5l-2.8-5.9L3.5 10.8 9.2 8 12 2.5Z" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.9)"/><path d="M12 6.5l1.2 2.8 2.9 1.2-2.9 1.2L12 14.9l-1.2-2.9-2.9-1.2 2.9-1.2L12 6.5Z" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.8)"/><path d="M12 9.1v2.8M9.2 12h5.6M10.3 7.3l1.7 1.7 1.7-1.7M10.3 16.7l1.7-1.7 1.7 1.7" stroke="rgba(255,255,255,.75)"/><path d="M12 2.5v2.1M19.5 10.8h2.1M2.4 10.8h2.1M17.2 17.5l1.3 1.3M6.8 17.5l-1.3 1.3" stroke="rgba(255,240,125,.9)"/></svg></div><div class="brand-name">Node Theory</div></div>
       <div class="auth-tabs"><button type="button" id="signupTab" class="active">Create account</button><button type="button" id="loginTab">Log in</button></div>
@@ -594,6 +776,9 @@ Error generating stack: `+e.message+`
       </div>
       <label class="field-label" for="accountEmail">Email</label><input class="field" id="accountEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
       <label class="field-label" for="accountPassword">Password</label><input class="field" id="accountPassword" name="password" type="password" autocomplete="new-password" placeholder="Create a password" required>
+      <div id="teacherSetupFields" class="hidden">
+        <label class="field-label" for="teacherSignInCode">Teacher sign-in code</label><input class="field" id="teacherSignInCode" name="teacherSignInCode" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Enter your teacher sign-in code">
+      </div>
       <div class="auth-error" id="authError" role="alert"></div>
       <button class="button-primary" id="authSubmit" type="submit">Submit</button>
     </form>
@@ -750,7 +935,10 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
     const content = document.getElementById("content");
 
     function academicFieldsMarkup(idPrefix, department = "", section = "") {
-      return \`<label class="field-label" for="\${idPrefix}Department">Department</label><select class="field" id="\${idPrefix}Department" name="\${idPrefix}Department" required><option value="" disabled \${engineeringDepartments.includes(department) ? "" : "selected"}>Choose your department</option>\${engineeringDepartments.map(option => \`<option value="\${option}" \${option === department ? "selected" : ""}>\${option}</option>\`).join("")}</select><label class="field-label" for="\${idPrefix}Section">Section</label><select class="field" id="\${idPrefix}Section" name="\${idPrefix}Section" required><option value="" disabled \${engineeringSections.includes(section) ? "" : "selected"}>Choose your section</option>\${engineeringSections.map(option => \`<option value="\${option}" \${option === section ? "selected" : ""}>\${option}</option>\`).join("")}</select>\`;
+      const departmentField = idPrefix === "account"
+        ? \`<label class="field-label" id="accountDepartmentLabel">Department</label><details class="department-picker" id="accountDepartmentPicker"><summary class="field" aria-labelledby="accountDepartmentLabel accountDepartmentValue"><span id="accountDepartmentValue">Choose your department</span></summary><div class="department-options" aria-label="Department options">\${engineeringDepartments.map(option => \`<button class="department-option" type="button" data-value="\${option}">\${option}</button>\`).join("")}</div><input id="accountDepartment" name="accountDepartment" type="hidden"></details>\`
+        : \`<label class="field-label" for="\${idPrefix}Department">Department</label><select class="field" id="\${idPrefix}Department" name="\${idPrefix}Department" required><option value="" disabled \${engineeringDepartments.includes(department) ? "" : "selected"}>Choose your department</option>\${engineeringDepartments.map(option => \`<option value="\${option}" \${option === department ? "selected" : ""}>\${option}</option>\`).join("")}</select>\`;
+      return \`\${departmentField}<label class="field-label" for="\${idPrefix}Section">Section</label><select class="field" id="\${idPrefix}Section" name="\${idPrefix}Section" required><option value="" disabled \${engineeringSections.includes(section) ? "" : "selected"}>Choose your section</option>\${engineeringSections.map(option => \`<option value="\${option}" \${option === section ? "selected" : ""}>\${option}</option>\`).join("")}</select>\`;
     }
 
     function defaultNotificationsForRole(role) {
@@ -1065,9 +1253,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
       if (authForm) authForm.reset();
       document.getElementById("accountRole").selectedIndex = 0;
       updateSignupFields();
-      document.querySelector(".app-shell").classList.add("hidden");
-      document.getElementById("authScreen").classList.remove("hidden");
-      setAuthMode("signup");
+      showLandingPage();
       showToast("Profile and workspace deleted.");
     }
 
@@ -1871,6 +2057,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
       if (state.role !== "student" && ["team-chat", "chat"].includes(state.page)) state.page = "overview";
       document.querySelector(".app-shell").classList.remove("hidden");
       document.getElementById("authScreen").classList.add("hidden");
+      document.getElementById("landingPage").classList.add("hidden");
       document.querySelectorAll(".nav-item").forEach(button => {
         const studentOnlyPage = ["team-chat", "chat"].includes(button.dataset.page);
         const enabled = ["overview", "projects", "data", "queries", "teams", "team-chat", "chat"].includes(button.dataset.page) && (!studentOnlyPage || state.role === "student");
@@ -2421,9 +2608,7 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
           if (authForm) authForm.reset();
           document.getElementById("accountRole").selectedIndex = 0;
           updateSignupFields();
-          document.querySelector(".app-shell").classList.add("hidden");
-          document.getElementById("authScreen").classList.remove("hidden");
-          setAuthMode("signup");
+          showLandingPage();
         }
         else if (action === "notifications") openNotificationsModal();
         return;
@@ -2765,10 +2950,12 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
       document.getElementById("themeToggle").setAttribute("aria-label", \`Color mode: \${labels[selected]}. Click to change mode.\`);
       document.getElementById("themeToggle").title = \`Color mode: \${labels[selected]} · Click to change\`;
       document.getElementById("authThemeSelect").value = selected;
-      document.querySelector('meta[name="theme-color"]').content = selected === "night" ? "#141a23" : selected === "ambient" ? "#f4ecdf" : "#f6f7fb";
+      document.getElementById("landingThemeSelect").value = selected;
+      document.querySelector('meta[name="theme-color"]').content = selected === "night" ? "#141a23" : selected === "ambient" ? "#f4ecdf" : "#f5f8fa";
       localStorage.setItem("ideaTheme", selected);
     }
     document.getElementById("authThemeSelect").addEventListener("change", event => applyTheme(event.target.value));
+    document.getElementById("landingThemeSelect").addEventListener("change", event => applyTheme(event.target.value));
     document.getElementById("themeToggle").addEventListener("click", () => {
       const modes = ["light", "night", "ambient"];
       const labels = { light: "Light", night: "Dark", ambient: "Ambient" };
@@ -2797,16 +2984,39 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
       document.getElementById("authError").textContent = "";
       document.getElementById("accountName").value = "";
       document.getElementById("accountDepartment").value = "";
+      const departmentPicker = document.getElementById("accountDepartmentPicker");
+      document.getElementById("accountDepartmentValue").textContent = "Choose your department";
+      departmentPicker.open = false;
       document.getElementById("accountSection").value = "";
+      document.getElementById("teacherSignInCode").value = "";
       document.getElementById("accountEmail").value = "";
       document.getElementById("accountPassword").value = "";
       updateSignupFields();
     }
     function updateSignupFields() {
+      const signup = authMode === "signup";
       const isStudent = document.getElementById("accountRole").value === "student";
-      document.getElementById("studentSetupFields").classList.toggle("hidden", !isStudent || authMode !== "signup");
-      document.getElementById("accountDepartment").required = isStudent && authMode === "signup";
-      document.getElementById("accountSection").required = isStudent && authMode === "signup";
+      const isTeacher = !isStudent;
+      document.getElementById("studentSetupFields").classList.toggle("hidden", !isStudent || !signup);
+      document.getElementById("teacherSetupFields").classList.toggle("hidden", !isTeacher || !signup);
+      document.getElementById("accountSection").required = isStudent && signup;
+      document.getElementById("teacherSignInCode").required = isTeacher && signup;
+    }
+    function showLandingPage() {
+      document.querySelector(".app-shell").classList.add("hidden");
+      document.getElementById("authScreen").classList.add("hidden");
+      document.getElementById("landingPage").classList.remove("hidden");
+      document.getElementById("accountRole").selectedIndex = 0;
+      setAuthMode("signup");
+      window.scrollTo(0, 0);
+    }
+    function openAuthScreen(mode) {
+      document.getElementById("landingPage").classList.add("hidden");
+      const authScreen = document.getElementById("authScreen");
+      authScreen.classList.remove("hidden");
+      authScreen.scrollTop = 0;
+      setAuthMode(mode);
+      document.getElementById(mode === "signup" ? "accountName" : "accountEmail").focus();
     }
     async function passwordDigest(value) {
       const bytes = new TextEncoder().encode(value);
@@ -2815,8 +3025,21 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
     }
     document.getElementById("signupTab").addEventListener("click", () => setAuthMode("signup"));
     document.getElementById("loginTab").addEventListener("click", () => setAuthMode("login"));
+    document.getElementById("landingSignupButton").addEventListener("click", () => openAuthScreen("signup"));
+    document.getElementById("landingLoginButton").addEventListener("click", () => openAuthScreen("login"));
+    document.getElementById("landingHeaderSignupButton").addEventListener("click", () => openAuthScreen("signup"));
+    document.getElementById("authBackButton").addEventListener("click", showLandingPage);
     document.getElementById("accountRole").addEventListener("change", updateSignupFields);
     document.getElementById("accountAcademicFields").innerHTML = academicFieldsMarkup("account", "", "");
+    document.getElementById("accountAcademicFields").addEventListener("click", event => {
+      const option = event.target.closest(".department-option");
+      if (!option) return;
+      const picker = document.getElementById("accountDepartmentPicker");
+      document.getElementById("accountDepartment").value = option.dataset.value;
+      document.getElementById("accountDepartmentValue").textContent = option.textContent;
+      picker.open = false;
+      picker.querySelector("summary").focus();
+    });
     updateSignupFields();
     document.getElementById("authForm").addEventListener("submit", async event => {
       event.preventDefault();
@@ -2831,6 +3054,10 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
         if (!name) { error.textContent = "Enter your name to create an account."; return; }
         if (accounts[email]) { error.textContent = "An account with this email already exists. Choose Log in."; return; }
         const role = String(form.get("role") || "student");
+        if (role === "teacher" && String(form.get("teacherSignInCode") || "") !== "Mentor-VEC") {
+          error.textContent = "Enter the correct teacher sign-in code.";
+          return;
+        }
         const department = String(form.get("accountDepartment") || "");
         const section = String(form.get("accountSection") || "");
         if (role === "student" && (!engineeringDepartments.includes(department) || !engineeringSections.includes(section))) {
@@ -2864,4 +3091,4 @@ R7,Claim Checker for Company Chatbots,AI Reliability,Moderate,,,\`;
   <\/script>
 </body>
 </html>
-`,b=o((e=>{var t=Symbol.for(`react.transitional.element`);function n(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.jsx=n})),ee=o(((e,t)=>{t.exports=b()}))();function te(){return(0,ee.jsx)(`iframe`,{className:`idea-app-frame`,title:`Node Theory student project portal`,srcDoc:y})}(0,v.createRoot)(document.getElementById(`root`)).render((0,ee.jsx)(_.StrictMode,{children:(0,ee.jsx)(te,{})}));
+`,b=o((e=>{var t=Symbol.for(`react.transitional.element`);function n(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.jsx=n})),ee=o(((e,t)=>{t.exports=b()}))();function te(){return(0,ee.jsx)(`iframe`,{className:`idea-app-frame`,title:`Node Theory`,srcDoc:y})}(0,v.createRoot)(document.getElementById(`root`)).render((0,ee.jsx)(_.StrictMode,{children:(0,ee.jsx)(te,{})}));

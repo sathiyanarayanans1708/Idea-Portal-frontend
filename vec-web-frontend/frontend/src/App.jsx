@@ -4,7 +4,7 @@ function App() {
   return (
     <iframe
       className="idea-app-frame"
-      title="Node Theory student project portal"
+      title="Node Theory"
       srcDoc={ideaPage}
     />
   );
